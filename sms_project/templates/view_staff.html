@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block title %} Add Staff | {% endblock title %}
+
+{% block body %}
+
+<center><h1>{{title}}</h1></center>
+
+<body class="d-flex flex-column min-vh-100">
+    <div class="container-fluid">
+        <div class="col-12">
+            {% if staffs %}
+            <div class="card bg-light me-4 mb-4 ms-4" >
+                <div class="card-header">
+                    <i class="fa-solid fa-list"></i>All Staffs</div>
+                <div class="card-body">
+                  <p class="card-text">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                        <thread>
+                            <tr class="table">
+                                <td>ID No.</td>
+                                <td>Name</td>
+                                <td>Gender</td>
+                                <td>DOB</td>
+                                <td>Phone</td>
+                                <td>Email</td>
+                                <td>Faculty Type</td>
+                                <td>Department</td>
+                                <td>Actions</td>
+                            </tr>
+                        </thread>
+                        <tbody>{% for staff in staffs %}
+                            <tbody>
+                                <tr>
+                                    <td>{{staff.staff_number}}</td>
+                                    <td>{{staff.first_name}} {{staff.last_name}}</td>
+                                    <td>{{staff.gender}}</td>
+                                    <td>{{staff.date_of_birth}}</td>
+                                    <td>{{staff.phone}}</td>
+                                    <td>{{staff.email}}@student.co.in</td>
+                                    <td>{{staff.faculty_type}}</td>
+                                    <td>{{staff.department}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-success me-1" href="{% url 'view_student' staff.id %}" data-bs-toggle="modal" data-bs-target="#myModal{{staff.id}}">
+                                            <i class="fa fa-solid fa-circle-info fa-lg"></i>
+                                          </button>
+                                          <!--Modal For Student-View-->
+                                          <div class="modal" id="myModal{{staff.id}}" tabindex="-1" aria-labelledby="myModalLabel1" aria-hidden="true">
+                                              <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                  <div class="modal-header">
+                                                    <h5 class="modal-title">
+                                                        Staff : {{ staff.first_name }} {{ staff.last_name }}
+                                                  </h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                      <span aria-hidden="true"></span>
+                                                    </button>
+                                                  </div>
+                                                  <div class="modal-body">
+                                                    <ul class="list-unstyled">
+                                                      <li>Staff ID: <strong>{{ staff.staff_number }}</strong></li>
+                                                      <li>Gender: <strong>{{staff.gender}}</strong></li>
+                                                      <li>DOB: <strong>{{staff.date_of_birth}}</strong></li>
+                                                      <li>Phone Number: <strong>{{staff.phone}}</strong></li>
+                                                      <li>Email ID: <strong>{{staff.email}}</strong></li>
+                                                      <li>Course: <strong>{{staff.faculty_type}}</strong></li>
+                                                      <li>Course: <strong>{{staff.department}}</strong></li>
+                                                      <li>Photo ID:<img src="/media/{{staff.image}}" width="300" height="300"></li>
+                                                    </ul>
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <a class="btn btn-warning me-1" href="{% url 'staff_edit' staff.id %}">
+                                                <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                                            </a>
+                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staff_delete{{staff.id}}">
+                                                <i class="fa fa-solid fa-trash-can fa-lg"></i>
+                                              </button> 
+                                              <!-- Modal - Delete Student -->
+                                              <div class="modal" id="staff_delete{{staff.id}}" tabindex="-1" aria-labelledby="myModalLabel2" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h5 class="modal-title">
+                                                        Staff : {{ staff.first_name }} {{ staff.last_name }}
+                                                      </h5>
+                                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true"></span>
+                                                      </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                      <p>Are you sure you want to delete this student?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                      <form action="{% url 'staff_delete' staff.id %}" method="POST">
+                                                        {% csrf_token %}
+                                                        <input type="submit" class="btn btn-primary" value="Delete">
+                                                      </form>
+                                                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div> 
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    </div>
+                  </p>
+                </div>
+            </div>
+            {% else %}
+            <h3 class="alert alert-primary ms-4 me4"> No Student In Database</h5>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+{% endblock body %}

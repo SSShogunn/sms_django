@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %} Add Event | {% endblock title %}
+
+{% block body %}
+<body>
+    <div class="conatiner-fluid py-4">
+        <h4 class='text-center'>Event Registration</h4>
+        <form class='container' method="POST" action='event_register' enctype="multipart/form-data">
+            {% csrf_token %}
+             <div class="form-group ">
+                <label for="event_name">Name Of The Event:</label>
+                <input type="text" class="form-control form-control-lg" id="event_name" name='event_name' placeholder="Event Name">
+            </div>
+            <div class="form-group ">
+                <label for="last_name">Destination of the Event:</label>
+                <input type="text" class="form-control form-control-lg" id="destination" name='destination' placeholder="Destination">
+            </div>
+            <div class="form-group ">
+                <label for="event_contact">Registration Link:</label>
+                <input type="text" class="form-control form-control-lg" id="event_contact" name='event_contact' placeholder="Link">
+            </div>
+            <div class="form-group" >
+                <label class='bold' for="date">Event Date:</label>
+                <input class="form-control form-control-lg" id="event_date" name="event_date" placeholder="MM/DD/YYYY" type="date">
+            </div>
+            <div class="form-group">
+                <label for="event_description">Event Description</label>
+                <textarea class="form-control-lg form-control" id="event_description" name='event_description' rows="10"></textarea>
+            </div>
+            <div>
+                <label for="formFileLg" class="form-label">Upload All the Images</label>
+                <input required type="file" class="form-control form-control-lg" id='event_thumbnail' name='event_thumbnail'>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+</body>
+
+{% endblock body %}
+
+
+

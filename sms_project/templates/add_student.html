@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %} Add Student | {% endblock title %}
+
+{% block body %}
+
+<body>
+    <div class="conatiner-fluid py-4">
+        <h4 class='text-center'>Student Registration</h4>
+        <form class='container' method="POST" action='student_register' enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group-center">
+              <label for="student_number">Student ID:</label>
+              <input maxlength="6" type="text" class="form-control" id="student_number" name="student_number" placeholder="ID Number">
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="first_name">First Name:</label>
+                <input type="text" class="form-control" id="first_name" name='first_name' placeholder="First Name">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="last_name">Last Name:</label>
+                <input type="text" class="form-control" id="last_name" name='last_name' placeholder="Last Name">
+              </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputState">Gender:</label>
+                    <select id="gender" name="gender" type="text" class="form-control">
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6" >
+                    <label for="date">Date:</label>
+                    <input class="form-control" id="date_of_birth" name="date_of_birth" placeholder="MM/DD/YYY" type="date"/>
+                </div>
+            </div>
+            <div class="form-group-center">
+              <label for="phone">Phone Number:</label>
+              <input maxlength="10" type="number" class="form-control" id="phone" name="phone" placeholder="Phone Number">
+            </div>
+            <div class="form-group-center">
+              <label for="phone">Email: </label>
+              <input type="text" class="form-control" id='email' name='email' placeholder="example@student.co.in">
+            </div>
+            <div class="form-group">
+                <label for="inputPassword4">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="image">Image:</label>
+                <input type="file" class="form-control" id='image' name='image'  placeholder="___Upload The Image Here___">
+              </div>
+            <div class="form-group">
+                <label for="inputState">Course Type:</label>
+                <select id="course" name="course" type="text" class="form-control">
+                    <option>Computer Science Core</option>
+                    <option>CSE Spcl. : AIML</option>
+                    <option>CSE Spcl. : Cyber Security</option>
+                    <option>CSE Spcl. : Gaming</option>
+                    <option>CSE Spcl. : Cloud Computing</option>
+                    <option>CSE Spcl. : E-Commerce</option>
+                    <option>Mechanical</option>
+                    <option>EEE</option>
+                    <option>ECE</option>
+                    <option>Integrated</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+</body>
+
+{% endblock body %}
+
+
+

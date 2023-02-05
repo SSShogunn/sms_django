@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %} Home | {% endblock title %}
+
+{% block body %} 
+
+
+<div class="album">
+  <div class="container">
+
+    <h1 class="my-2 text-center">Events In College</h1>
+    {% if events %}
+    <div class="row">
+    {% for event in events %}
+      <div class="col-md-4">
+        <div class="card mb-4 shadow-sm">
+          <img src="/media/{{event.event_thumbnail}}" class="d-block w-100" width="300" height="400">
+          <div class="card-body">
+            <h3 class="my-1 text">{{event.event_name}}</h3>
+            <p class="card-text">{{event.event_description}}</p>
+            <div class="d-flex justify-content-between align-ite s-center">
+              <div class="btn-group">
+                <a href="{{event.event_contact}}">
+                <button type="button" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-right-to-bracket"></i> Register</button></a>
+                <button type="button" class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-location-dot"></i> {{event.destination}} </button>
+              </div>
+              <button type="button" class="btn btn-sm btn-outline-secondary"><i class="fa-regular fa-calendar-days"></i> {{event.event_date}} </button>
+            </div>
+          </div>
+        </div>
+      </div>  
+    {% endfor %}
+    </div>
+    {% else %}
+    <h3 class="alert alert-primary ms-4 me4"> No Events </h5>
+    {% endif %}
+      
+    </div>
+  </div>
+</div>
+ {% endblock body %}
+
+
+
+
